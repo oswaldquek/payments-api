@@ -1,4 +1,25 @@
+server:
+  applicationConnectors:
+    - type: http
+      port: 8080
+    # TODO: enable https
+    #- type: https
+    #  port: 8081
+    #  keyStorePath:
+    #  keyStorePassword:
+    #  supportedProtocols: ["TLSv1.1","TLSv1.2"]
+    #  supportedCipherSuites:
+    #    - TLS_DHE_RSA_WITH_AES_128_GCM_SHA256 # for TLS 1.2
+    #    - TLS_DHE_RSA_WITH_AES_128_CBC_SHA # for TLS 1.1
+  #adminConnectors:
+  #  - type: http
+  #    port: 50111
+
 logging:
   level: INFO
-  loggers:
-    com.form3: DEBUG
+  appenders:
+    - type: file
+      currentLogFilename: log/payments-api.log
+      archivedLogFilenamePattern: log/payments-api.log.%d.gz
+      logFormat: '%-5p [%d{ISO8601,UTC}] %c: %m%n%xEx'
+    - type: console

@@ -3,11 +3,14 @@ package com.form3.domain;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 
+import javax.validation.constraints.NotNull;
 import java.util.Optional;
 
 public class Payment {
+    @NotNull
     private Type type;
-    private Optional<String> id;
+    private Optional<String> id = Optional.empty();
+    @NotNull
     private PaymentAttributes attributes;
 
     private Payment() {}
@@ -15,7 +18,6 @@ public class Payment {
     public Payment(Type type, PaymentAttributes attributes) {
         this.type = type;
         this.attributes = attributes;
-        this.id = Optional.empty();
     }
 
     public Payment(Type type, String id, PaymentAttributes attributes) {

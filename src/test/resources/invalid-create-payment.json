@@ -1,0 +1,19 @@
+{
+  "attributes": {
+    "status": "Submitted",
+    "amount": "100.21",
+    "currency": "GBP",
+    "payment_scheme": "FPS",
+    "originating_party": {
+      "account_number": "41426819",
+      "account_name": "Mrs Emilia Brown",
+      "bank_id": "20-33-01",
+      "bank_id_code": "GBDSC"
+    },
+    "beneficiary_party": {
+      "account_number": "31926819",
+      "account_name": "Mr. Wilfred Owens",
+      "bank_id_code": "GBDSC"
+    }
+  }
+}

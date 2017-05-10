@@ -1,12 +1,23 @@
 package com.form3.domain;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 
+import javax.validation.constraints.NotNull;
+
 public class Party {
+    @NotNull
+    @JsonProperty("account_number")
     private String accountNumber;
+    @NotNull
+    @JsonProperty("account_name")
     private String accountName;
+    @NotNull
+    @JsonProperty("bank_id")
     private String bankId;
+    @NotNull
+    @JsonProperty("bank_id_code")
     private String bankIdCode;
 
     private Party() {}
