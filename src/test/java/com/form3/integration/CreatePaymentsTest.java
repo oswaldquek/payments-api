@@ -33,10 +33,17 @@ public class CreatePaymentsTest {
     }
 
     @Test
-    public void createPaymentWithMissingType_paymentType_bankId() throws IOException {
-        String json = FileUtils.readFileToString(new File(ResourceHelpers.resourceFilePath("invalid-create-payment.json")), "UTF-8");
+    public void createPaymentWithMissingType_paymentType_bankId_shouldReturnUnprocessableEntity() throws IOException {
+        String json = FileUtils.readFileToString(new File(ResourceHelpers.resourceFilePath("payment-with-missing-fields.json")), "UTF-8");
         Response response = client.target(paymentsApi.uri("/payments/create")).request().post(Entity.json(json));
         assertThat(response.getStatus()).isEqualTo(422);
+    }
+
+    @Test
+    public void createPaymentWithInvalidPaymentScheme_shouldReturnBadRequest() throws IOException {
+        String json = FileUtils.readFileToString(new File(ResourceHelpers.resourceFilePath("payment-with-invalid-scheme.json")), "UTF-8");
+        Response response = client.target(paymentsApi.uri("/payments/create")).request().post(Entity.json(json));
+        assertThat(response.getStatus()).isEqualTo(400);
     }
 
 }

@@ -1,0 +1,22 @@
+{
+  "type": "payments",
+  "attributes": {
+    "status": "Submitted",
+    "amount": "100.21",
+    "currency": "GBP",
+    "payment_type": "Credit",
+    "payment_scheme": "FUN",
+    "originating_party": {
+      "account_number": "41426819",
+      "account_name": "Mrs Emilia Clarke",
+      "bank_id": "20-33-01",
+      "bank_id_code": "GBDSC"
+    },
+    "beneficiary_party": {
+      "account_number": "31926819",
+      "account_name": "Mr. Wilfred Owens",
+      "bank_id": "40-30-00",
+      "bank_id_code": "GBDSC"
+    }
+  }
+}
