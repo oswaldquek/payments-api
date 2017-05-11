@@ -1,7 +1,9 @@
 package com.form3.api;
 
+import com.form3.auth.User;
 import com.form3.db.PaymentsDataService;
 import com.form3.domain.Payment;
+import io.dropwizard.auth.Auth;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -25,7 +27,7 @@ public class GetPayments {
 
     @GET
     @Path("/{paymentId}")
-    public Response getPayment(@PathParam("paymentId") String id) {
+    public Response getPayment(@Auth User user, @PathParam("paymentId") String id) {
         Optional<Payment> payment = db.get(id);
         if (payment.isPresent()) {
             return Response.ok(payment.get()).links(getLinks(id)).build();
@@ -35,7 +37,7 @@ public class GetPayments {
 
     @GET
     @Path("/all")
-    public Response getAllPayments() {
+    public Response getAllPayments(@Auth User user) {
         Collection<Payment> payments = db.getAll();
         return Response.ok().entity(payments).build();
     }

@@ -1,5 +1,8 @@
 package com.form3;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.datatype.jdk8.Jdk8Module;
+import com.fasterxml.jackson.jaxrs.json.JacksonJsonProvider;
 import com.form3.domain.Party;
 import com.form3.domain.Payment;
 import com.form3.domain.PaymentAttributes;
@@ -10,8 +13,12 @@ import com.form3.domain.Type;
 import com.form3.domain.builders.PartyBuilder;
 import com.form3.domain.builders.PaymentAttributesBuilder;
 
+import javax.ws.rs.client.Client;
+import javax.ws.rs.client.ClientBuilder;
+import javax.ws.rs.client.Invocation;
 import javax.ws.rs.core.Link;
 import java.math.BigDecimal;
+import java.net.URI;
 import java.util.Currency;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -49,5 +56,20 @@ public class TestHelpers {
 
     public static Link getLink(Set<Link> links, String rel) {
         return links.stream().filter(link -> link.getRel().equals(rel)).collect(Collectors.toList()).get(0);
+    }
+
+    public static Invocation.Builder getInvocationBuilder(Client client, URI targetUri) {
+        return client.target(targetUri).request().header("Authorization", "Basic cGVlc2tpbGxldDpwYXNz");
+    }
+
+    private static Client client = null;
+
+    public static Client getJerseyClient() {
+        if (client != null) {
+            return client;
+        }
+        ObjectMapper mapper = new ObjectMapper();
+        mapper.registerModule(new Jdk8Module());
+        return ClientBuilder.newClient().register(new JacksonJsonProvider(mapper));
     }
 }

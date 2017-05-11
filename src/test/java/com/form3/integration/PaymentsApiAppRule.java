@@ -8,7 +8,7 @@ import javax.ws.rs.core.UriBuilder;
 import java.net.URI;
 
 public class PaymentsApiAppRule extends DropwizardAppRule<PaymentsApplicationConfiguration> {
-    public PaymentsApiAppRule(Class<PaymentsApplication> applicationClass, String configPath) {
+    public PaymentsApiAppRule(Class<? extends PaymentsApplication> applicationClass, String configPath) {
         super(applicationClass, configPath);
     }
 

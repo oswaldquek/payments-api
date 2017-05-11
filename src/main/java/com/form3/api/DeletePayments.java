@@ -1,11 +1,14 @@
 package com.form3.api;
 
+import com.form3.auth.User;
 import com.form3.db.PaymentsDataService;
+import io.dropwizard.auth.Auth;
 
 import javax.ws.rs.DELETE;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.core.Response;
+import java.security.Principal;
 
 @Path("/payments/delete")
 public class DeletePayments {
@@ -17,7 +20,7 @@ public class DeletePayments {
 
     @DELETE
     @Path("/{paymentId}")
-    public Response getPayment(@PathParam("paymentId") String id) {
+    public Response delete(@Auth User user, @PathParam("paymentId") String id) {
         db.delete(id);
         return Response.ok().build();
     }

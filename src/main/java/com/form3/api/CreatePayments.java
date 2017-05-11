@@ -1,7 +1,9 @@
 package com.form3.api;
 
+import com.form3.auth.User;
 import com.form3.db.PaymentsDataService;
 import com.form3.domain.Payment;
+import io.dropwizard.auth.Auth;
 
 import javax.validation.Valid;
 import javax.ws.rs.Consumes;
@@ -12,6 +14,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriBuilder;
 import java.net.URI;
+import java.security.Principal;
 
 import static com.form3.helpers.LinksHelper.getLinks;
 
@@ -27,10 +30,10 @@ public class CreatePayments {
     }
 
     @POST
-    public Response create(@Valid Payment payment) {
+    public Response create(@Auth User user, @Valid Payment payment) {
         if (payment == null) throw new RuntimeException("payment is null");
         String id = db.store(payment);
         URI location = UriBuilder.fromPath("/payments/{id}").build(id);
-        return Response.created(location).links(getLinks(id)).build();
+        return Response.created(location).entity(db.get(id).get()).links(getLinks(id)).build();
     }
 }

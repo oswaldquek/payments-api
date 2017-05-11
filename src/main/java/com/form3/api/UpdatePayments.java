@@ -1,8 +1,10 @@
 package com.form3.api;
 
+import com.form3.auth.User;
 import com.form3.domain.Errors;
 import com.form3.db.PaymentsDataService;
 import com.form3.domain.Payment;
+import io.dropwizard.auth.Auth;
 
 import javax.validation.Valid;
 import javax.ws.rs.Consumes;
@@ -12,6 +14,7 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import java.security.Principal;
 import java.util.Optional;
 
 import static com.form3.helpers.LinksHelper.getLinks;
@@ -28,7 +31,7 @@ public class UpdatePayments {
 
     @PUT
     @Path("/{paymentId}")
-    public Response update(@PathParam("paymentId") String id, @Valid Payment payment) {
+    public Response update(@Auth User user, @PathParam("paymentId") String id, @Valid Payment payment) {
         Optional<Errors> errors = db.update(id, payment);
         if (errors.isPresent()) {
             return Response.status(errors.get().getCode().status).entity(errors.get().getMessages()).build();
