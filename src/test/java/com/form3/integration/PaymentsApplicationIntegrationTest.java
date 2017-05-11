@@ -18,8 +18,8 @@ import java.util.Optional;
 
 public class PaymentsApplicationIntegrationTest extends PaymentsApplication {
 
-    // override setUpAuthJwt so we don't have to get an access token for each integration test. this means
-    // a header of "Authorization Basic cGVlc2tpbGxldDpwYXNz" for example needs to be set on each request
+    // override setUpAuthJwt so we don't have to get an access token for each integration test. use of basic auth is sufficient here.
+    // this means a header of "Authorization Basic cGVlc2tpbGxldDpwYXNz" for example needs to be set on each request
     @Override
     protected void setUpAuthJwt(PaymentsApplicationConfiguration configuration, Environment environment) throws UnsupportedEncodingException {
         environment.jersey().register(new AuthDynamicFeature(

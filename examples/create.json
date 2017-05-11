@@ -5,7 +5,7 @@
     "amount": "100.21",
     "currency": "GBP",
     "payment_type": "Credit",
-    "payment_scheme": "FUN",
+    "payment_scheme": "FPS",
     "originating_party": {
       "account_number": "41426819",
       "account_name": "Mrs Emilia Clarke",

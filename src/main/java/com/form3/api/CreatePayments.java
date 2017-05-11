@@ -31,7 +31,6 @@ public class CreatePayments {
 
     @POST
     public Response create(@Auth User user, @Valid Payment payment) {
-        if (payment == null) throw new RuntimeException("payment is null");
         String id = db.store(payment);
         URI location = UriBuilder.fromPath("/payments/{id}").build(id);
         return Response.created(location).entity(db.get(id).get()).links(getLinks(id)).build();

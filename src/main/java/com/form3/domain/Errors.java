@@ -27,7 +27,6 @@ public class Errors {
     }
 
     public enum Code {
-        PAYMENT_IDS_NO_MATCH(Response.Status.BAD_REQUEST),
         PAYMENT_ID_NOT_FOUND(Response.Status.NOT_FOUND),
         CANNOT_UPDATE_IMMUTABLE_VALUES(Response.Status.BAD_REQUEST);
 

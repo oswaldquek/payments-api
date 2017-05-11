@@ -26,7 +26,7 @@ import static org.jose4j.jws.AlgorithmIdentifiers.HMAC_SHA256;
 public class LoginResource {
     private final SecretsManagementService secretsManagementService;
     private final UserValidationService userValidationService;
-    private int jwtTokenValidity;
+    private final int jwtTokenValidity;
 
     public LoginResource(SecretsManagementService secretsManagementService, UserValidationService userValidationService, int jwtTokenValidity) {
         this.secretsManagementService = secretsManagementService;
